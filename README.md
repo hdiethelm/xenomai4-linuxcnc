@@ -2,6 +2,8 @@
 
 <strong>Work in progress, not yet working!</strong>
 
+<strong>Expected Distribution: Debian Trixie</strong>
+
 ## How To
 
 - Clone repo
