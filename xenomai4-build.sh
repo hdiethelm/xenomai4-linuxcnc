@@ -16,21 +16,11 @@ make -j16 deb-pkg LOCALVERSION=-xenomai4-$KERNEL_GIT_VERSION KDEB_PKGVERSION=$(m
 cd ..
   
 #Xenomai4 userspace tools-------------------------------------
-mkdir libevl-build
-cd libevl-build
-
-# Prepare the build directory
-meson setup -Dbuildtype=release -Dprefix=/opt/evl -Duapi=$(pwd)/../linux-evl/usr/include . ../libevl
-
-# Build it
-meson compile
-
-# Install the result
-ninja install
-cd ..
-
-echo "/opt/evl/lib/x86_64-linux-gnu" | sudo tee /etc/ld.so.conf.d/xenomai.conf > /dev/null
-sudo ldconfig
+cd libevl
+#DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dh_make --createorig -p libevl_56
+#dh_auto_configure --buildsystem=meson -- -Duapi=$(pwd)/../linux-evl/usr/include
+cp -r ../libevl-debian/ debian
+dpkg-buildpackage -b -uc
 
 #Cleanup-----------------------------------------------------
 mkdir deb
@@ -38,7 +28,10 @@ mv *.deb deb
 rm *.changes *.buildinfo *.tar.gz *.dsc
 
 git -C linux-evl clean -fxd
-rm -r libevl-build/
+git -C libevl clean -fxd
+
+git add \
+  deb/libevl_56-1_amd64.deb
 
 git add \
   deb/linux-headers-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-2_amd64.deb \

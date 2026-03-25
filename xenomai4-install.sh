@@ -11,4 +11,4 @@ sudo dpkg -i \
 # sudo dmesg | grep -i xenomai
 
 #Xenomai4 userspace tools-------------------------------------
-#ToDo:debian packages?
+sudo dpkg -i deb/libevl_56-1_amd64.deb
