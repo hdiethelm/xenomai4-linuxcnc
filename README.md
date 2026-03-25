@@ -7,13 +7,13 @@
 ## How To
 
 - Clone repo
-- If you trust my binary packages <strong>Not yet working, libevl needs a package</strong>
+- If you trust my binary packages
   - `./xenomai4-install.sh`
 - Build it from source
   - `git submodule init`
   - `git submodule update`
   - `xenomai4-prepare.sh`
-  - `xenomai4-build.sh` Note: This script does also some install parts due to missing libevl deb
+  - `xenomai4-build.sh`
   - `xenomai4-install.sh`
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
@@ -44,7 +44,7 @@
 ### Xenomai4 tools
 - Xenomai latency test
   - Selec an isolated CPU! For example for CPU3: <br>
-  `sudo /opt/evl/bin/latmus -c 3`
+  `sudo latmus -c 3`
 - Check for Xenomai enabled threads
-  - `/opt/evl/bin/evl ps`
+  - `evl ps`
   - rtapi_app should show up on the isolated CPU
