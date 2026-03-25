@@ -43,7 +43,7 @@
 
 ### Xenomai4 tools
 - Xenomai latency test
-  - Selec an isolated CPU! For example for CPU3: <br>
+  - Select an isolated CPU. For example for CPU3: <br>
   `sudo latmus -c 3`
 - Check for Xenomai enabled threads
   - `evl ps`
