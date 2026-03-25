@@ -6,13 +6,13 @@
 
 - Clone repo
 - If you trust my binary packages <strong>Not yet working, libevl needs a package</strong>
-  - `./xenomai3-install.sh`
+  - `./xenomai4-install.sh`
 - Build it from source
   - `git submodule init`
   - `git submodule update`
-  - `xenomai3-prepare.sh`
-  - `xenomai3-build.sh` Note: This script does also some install parts due to missing libevl deb
-  - `xenomai3-install.sh`
+  - `xenomai4-prepare.sh`
+  - `xenomai4-build.sh` Note: This script does also some install parts due to missing libevl deb
+  - `xenomai4-install.sh`
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
   - `sudo dmesg | grep -i evl`
