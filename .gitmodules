@@ -1,0 +1,6 @@
+[submodule "linux-evl"]
+	path = linux-evl
+	url = https://gitlab.com/xenomai/xenomai4/linux-evl.git
+[submodule "libevl"]
+	path = libevl
+	url = https://gitlab.com/xenomai/xenomai4/libevl.git
