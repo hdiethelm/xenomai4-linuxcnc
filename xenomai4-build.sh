@@ -12,7 +12,7 @@ LIBEVL_GIT_VERSION=11e6a1
 cd linux-evl
 cp ../kconfig-base-config-6.12.74+deb13+1-rt-amd64.txt .config #Base: debian trixie config-6.12.74+deb13+1-rt-amd64
 make oldconfig
-make -j16 deb-pkg LOCALVERSION=-xenomai4-$KERNEL_GIT_VERSION KDEB_PKGVERSION=$(make kernelversion)-1
+make -j16 deb-pkg LOCALVERSION=-xenomai4-$KERNEL_GIT_VERSION KDEB_PKGVERSION=$(make kernelversion)-2
 cd ..
   
 #Xenomai4 userspace tools-------------------------------------
@@ -41,7 +41,7 @@ git -C linux-evl clean -fxd
 rm -r libevl-build/
 
 git add \
-  deb/linux-headers-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-1_amd64.deb \
-  deb/linux-image-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-1_amd64.deb
+  deb/linux-headers-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-2_amd64.deb \
+  deb/linux-image-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-2_amd64.deb
 
 git clean -f deb/
