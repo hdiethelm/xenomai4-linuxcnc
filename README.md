@@ -45,6 +45,7 @@
 - Xenomai latency test
   - Select an isolated CPU. For example for CPU3: <br>
   `sudo latmus -c 3`
-- Check for Xenomai enabled threads
-  - `evl ps`
+- Check for Xenomai enabled threads and status
+  - `evl ps -l`
   - rtapi_app should show up on the isolated CPU
+  - ISW should stay constant (unwanted mode switches)
