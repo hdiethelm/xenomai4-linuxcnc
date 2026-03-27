@@ -1,14 +1,13 @@
 #! /bin/sh
 
+source xenomai4-vars.sh
+
 #Xenomai4 Kernel-----------------------------------------
 #git clone https://gitlab.com/xenomai/xenomai4/linux-evl.git
 #git -C linux-evl checkout v6.12.67-evl2-rebase
-KERNEL_GIT_VERSION=53a3aa
-KERNEL_VERSION_STUFFIX=2
 
 #git clone https://gitlab.com/xenomai/xenomai4/libevl.git
 #git -C libevl checkout r56
-LIBEVL_GIT_VERSION=11e6a1
 
 cd linux-evl
 cp ../kconfig-base-config-6.12.74+deb13+1-rt-amd64.txt .config #Base: debian trixie config-6.12.74+deb13+1-rt-amd64
@@ -36,7 +35,7 @@ git add \
   deb/libevl_56-1_amd64.deb
 
 git add \
-  deb/linux-headers-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-${KERNEL_VERSION_STUFFIX}_amd64.deb \
-  deb/linux-image-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_6.12.67-${KERNEL_VERSION_STUFFIX}_amd64.deb
+  deb/linux-headers-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
+  deb/linux-image-6.12.67-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
 
 git clean -f deb/
