@@ -41,6 +41,14 @@
 
 <strong>The target of this repo is to make it easy for others to use LinuxCNC with Xenomai4. No waranty can be given!</strong>
 
+### Ethernet
+
+The only two cards where drivers are availabe up to now:
+- Intel(R) e1000e Gigabit Ethernet
+- Intel(R) 82575/82576 Gigabit Ethernet
+
+For details, read: ethernet.md
+
 ### Xenomai4 tools
 - Xenomai latency test
   - Select an isolated CPU. For example for CPU3: <br>
