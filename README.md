@@ -43,9 +43,18 @@
 
 ### Ethernet
 
-The only two cards where drivers are availabe up to now:
-- Intel(R) e1000e Gigabit Ethernet
-- Intel(R) 82575/82576 Gigabit Ethernet
+Driver info from Intel: https://www.intel.com/content/www/us/en/support/articles/000005480/ethernet-products.html
+
+The only two drivers are availabe up to now for Xenimai3 and Xenomai4 are:
+- Intel igb
+  - Driver matches upstream except OOB patches
+  - Cards still on sale:
+    - 82576
+    - I210
+    - I350
+- Intel e1000e
+  - Driver matches upstream except OOB patches
+  - Works for tesing in qemu + virtmanager
 
 For details, read: ethernet.md
 
