@@ -1,0 +1,40 @@
+#My hacky worksheet to get evl network running in virtmanager
+
+/etc/modprobe.d/blacklist.conf
+blacklist e1000e
+blacklist virtio_balloon #Blocks rt_e1000e interrupt
+
+sudo modprobe e1000e 
+sudo ifconfig enp1s0 down
+sudo ifconfig enp7s0 up
+sudo dhclient enp7s0
+ping 192.168.122.1
+
+#sudo apt install clang llvm
+#wget https://github.com/eunomia-bpf/eunomia-bpf/releases/latest/download/ecc && chmod +x ./ecc
+#./ecc ebpf_forward_all_evl.c
+#./ecc ebpf_forward_ip_evl.c
+
+sudo apt install clang
+#clang -O2 -g -target bpf -I /usr/include/x86_64-linux-gnu -c ebpf_forward_all_evl.c -o ebpf_forward_all_evl.o
+clang -O2 -g -target bpf -I /usr/include/x86_64-linux-gnu -c ebpf_forward_ip_evl.c -o ebpf_forward_ip_evl.o
+
+#GCC variant gives warnings while loading
+#sudo apt install gcc-bpf
+#bpf-gcc -O2 -g -I/usr/include/x86_64-linux-gnu -I/usr/include -c ebpf_forward_all_evl.c -o ebpf_forward_all_evl.o
+#bpf-gcc -O2 -g -I/usr/include/x86_64-linux-gnu -I/usr/include -c ebpf_forward_ip_evl.c -o ebpf_forward_ip_evl.o
+
+#Normal
+#from host: ping 192.168.122.91
+sudo evl net -ei enp7s0
+#sudo evl net -Febpf_forward_all_evl.bpf.o -i enp7s0
+#sudo evl net -Febpf_forward_ip_evl.bpf.o -i enp7s0
+#sudo evl net -Febpf_forward_all_evl.o -i enp7s0
+sudo evl net -Febpf_forward_ip_evl.o -i enp7s0
+
+sudo oob-net-icmp -i enp7s0
+#from host: ping 192.168.122.91
+
+sudo evl net -S 192.168.122.1 -i enp7s0
+sudo evl net -Q -i enp7s0
+sudo evl net -di enp7s0
