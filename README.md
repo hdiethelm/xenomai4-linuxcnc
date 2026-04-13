@@ -1,6 +1,8 @@
 # Xenomai4 Kernel for LinuxCNC
 
-<strong>Work in progress, not yet working!</strong>
+<strong>Work in progress, things might not work or break your system!</strong>
+
+<strong>Feedback is welcome, create an issue or pull request</strong>
 
 <strong>Expected Distribution: Debian Trixie</strong>
 
