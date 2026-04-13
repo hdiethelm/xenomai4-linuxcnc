@@ -22,4 +22,4 @@
 # dh_make generated override targets.
 # This is an example for Cmake (see <https://bugs.debian.org/641051>).
 override_dh_auto_configure:
-	dh_auto_configure --buildsystem=meson -- -Duapi=$(CURDIR)/../linux-evl/usr/include
+	dh_auto_configure --buildsystem=meson -- -Duapi=$(CURDIR)/../linux-evl
