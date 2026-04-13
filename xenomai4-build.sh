@@ -26,6 +26,7 @@ cd libevl
 #dh_auto_configure --buildsystem=meson -- -Duapi=$(pwd)/../linux-evl/usr/include
 cp -r ../libevl-debian/ debian
 dpkg-buildpackage -b -uc
+cd ..
 
 #Cleanup-----------------------------------------------------
 mkdir -p deb
