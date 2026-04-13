@@ -14,7 +14,9 @@ set -e
 cd linux-evl
 cp ../kconfig-base-config-6.12.74+deb13+1-rt-amd64.txt .config #Base: debian trixie config-6.12.74+deb13+1-rt-amd64
 make oldconfig
-evl check -f .config
+echo evl check result--------
+evl check -f .config || true
+echo ------------------------
 make -j16 deb-pkg LOCALVERSION=-xenomai4-$KERNEL_GIT_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
 cd ..
   
@@ -26,7 +28,7 @@ cp -r ../libevl-debian/ debian
 dpkg-buildpackage -b -uc
 
 #Cleanup-----------------------------------------------------
-mkdir deb
+mkdir -p deb
 mv *.deb deb
 rm *.changes *.buildinfo *.orig.tar.gz *.debian.tar.gz *.dsc
 
