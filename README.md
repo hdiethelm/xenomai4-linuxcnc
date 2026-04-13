@@ -43,6 +43,8 @@
 
 <strong>The target of this repo is to make it easy for others to use LinuxCNC with Xenomai4. No waranty can be given!</strong>
 
+All instuctions in here base on the documentation on https://v4.xenomai.org/ with some quirks resolved.
+
 Xenomai4 support got recently merged to master: https://github.com/LinuxCNC/linuxcnc/pull/3903
 
 ### Ethernet
@@ -70,3 +72,20 @@ For details, read: ethernet.md
   - `evl ps -l`
   - rtapi_app should show up on the isolated CPU
   - ISW should stay constant (unwanted mode switches)
+  
+### Xenomai4 userspace tools plain install
+For other operating systems or if you have issues with the debian packages
+```
+#make and install
+mkdir libevl-build && cd libevl-build
+
+#Note: For now, linuxcnc expects includes to be in /usr/include/evl
+#ToDo: Fix this
+meson setup -Dbuildtype=release -Dprefix=/usr/ -Duapi=$(pwd)/../linux-evl . ../libevl
+meson compile
+sudo ninja install
+
+#uninstall:
+sudo ninja uninstall
+sudo rm -r /usr/include/evl
+```
