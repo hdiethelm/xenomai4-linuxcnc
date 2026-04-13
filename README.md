@@ -79,13 +79,17 @@ For other operating systems or if you have issues with the debian packages
 #make and install
 mkdir libevl-build && cd libevl-build
 
-#Note: For now, linuxcnc expects includes to be in /usr/include/evl
-#ToDo: Fix this
-meson setup -Dbuildtype=release -Dprefix=/usr/ -Duapi=$(pwd)/../linux-evl . ../libevl
+meson setup -Dbuildtype=release -Dprefix=/opt/evl -Duapi=$(pwd)/../linux-evl . ../libevl
 meson compile
 sudo ninja install
+echo "/opt/evl/lib/x86_64-linux-gnu" | sudo tee /etc/ld.so.conf.d/evl.conf > /dev/null
+sudo ldconfig
 
 #uninstall:
 sudo ninja uninstall
-sudo rm -r /usr/include/evl
+sudo rm -r /opt/evl/
+
+#linuxcnc xenomai4 doesn't support non standard include/lib paths for evl for now
+#You need to configure linuxcnc with:
+./configure --with-realtime=uspace CPPFLAGS=-I/opt/evl/include LDFLAGS=-L/opt/evl/lib/x86_64-linux-gnu
 ```
