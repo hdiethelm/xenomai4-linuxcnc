@@ -18,7 +18,7 @@
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
   - `sudo dmesg | grep -i evl`
-- Build LinuxCNC <strong>Not yet working, needs Xenomai4 porting</strong>
+- Build LinuxCNC
   - `git clone https://github.com/LinuxCNC/linuxcnc.git linuxcnc-src`
   - `cd inuxcnc-src/src`
   - `./debian/configure`
@@ -31,15 +31,17 @@
     `checking for realtime API(s) to use... uspace+xenomai`
   - `make -j`
   - `sudo make setuid`
-- Run LinuxCNC <strong>Not yet working, needs Xenomai4 porting</strong>
+- Run LinuxCNC
   - ../scripts/linuxcnc
-  - LinuxCNC should show: `Note: Using XENOMAI (posix-skin) realtime`
-  - latency-histogram is broken and has to be started using: <br>
+  - LinuxCNC should show: `Note: Using XENOMAI4 EVL realtime`
+  - latency-histogram has to be started using: <br>
   `../scripts/rip-environment ../scripts/latency-histogram`
 
 ## Notes
 
 <strong>The target of this repo is to make it easy for others to use LinuxCNC with Xenomai4. No waranty can be given!</strong>
+
+Xenomai4 support got recently merged to master: https://github.com/LinuxCNC/linuxcnc/pull/3903
 
 ### Ethernet
 
