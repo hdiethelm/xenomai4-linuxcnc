@@ -10,6 +10,10 @@ sudo ifconfig enp7s0 up
 sudo dhclient enp7s0
 ping 192.168.122.1
 
+sudo route del default enp7s0
+sudo route del -net 192.168.122.0 netmask 255.255.255.0
+
+
 #sudo apt install clang llvm
 #wget https://github.com/eunomia-bpf/eunomia-bpf/releases/latest/download/ecc && chmod +x ./ecc
 #./ecc ebpf_forward_all_evl.c
