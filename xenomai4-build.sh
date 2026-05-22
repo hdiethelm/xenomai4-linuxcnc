@@ -24,8 +24,8 @@ cd ..
 cd libevl
 #DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dh_make --createorig -p libevl_56
 #dh_auto_configure --buildsystem=meson -- -Duapi=$(pwd)/../linux-evl/usr/include
-#DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dch -v 57 "Update r57"
 cp -r ../libevl-debian/ debian
+DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dch -v ${LIBEVL_VERSION} "Update r${LIBEVL_VERSION}"
 dpkg-buildpackage -b -uc
 cd ..
 
@@ -38,10 +38,10 @@ git -C linux-evl clean -fxd
 git -C libevl clean -fxd
 
 git add \
-  deb/libevl_57-1_amd64.deb
+  deb/libevl_${LIBEVL_VERSION}_amd64.deb
 
 git add \
-  deb/linux-headers-${KERNEL_VERSION}-cip19-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
-  deb/linux-image-${KERNEL_VERSION}-cip19-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
+  deb/linux-headers-${KERNEL_VERSION}-cip22-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
+  deb/linux-image-${KERNEL_VERSION}-cip22-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
 
 git clean -f deb/
