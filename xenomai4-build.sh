@@ -12,7 +12,7 @@ set -e
 #git -C libevl checkout r57
 
 cd linux-evl
-cp ../kconfig-base-config-6.12.74+deb13+1-rt-amd64.txt .config #Base: debian trixie config-6.12.74+deb13+1-rt-amd64
+cp ../kconfig-base-config-6.12.94+deb13-rt-amd64.txt .config #Base: debian trixie config-6.12.94+deb13-rt-amd64
 make oldconfig
 echo evl check result--------
 evl check -f .config || true
