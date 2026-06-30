@@ -93,3 +93,7 @@ sudo rm -r /opt/evl/
 #You need to configure linuxcnc with:
 ./configure --with-realtime=uspace CPPFLAGS=-I/opt/evl/include LDFLAGS=-L/opt/evl/lib/x86_64-linux-gnu
 ```
+
+### Developer Information
+
+linux-evl branch: v6.12.y-cip-evl-rebase
