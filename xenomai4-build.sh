@@ -12,12 +12,12 @@ set -e
 #git -C libevl checkout r57
 
 cd linux-evl
-cp ../kconfig-base-config-6.12.94+deb13-rt-amd64.txt .config #Base: debian trixie config-6.12.94+deb13-rt-amd64
+cp ../$KERNEL_CONFIG .config
 make oldconfig
 echo evl check result--------
 evl check -f .config || true
 echo ------------------------
-make -j16 deb-pkg LOCALVERSION=-xenomai4-$KERNEL_GIT_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
+make -j16 deb-pkg LOCALVERSION=$KERNEL_LOCAL_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
 cd ..
   
 #Xenomai4 userspace tools-------------------------------------
@@ -41,7 +41,7 @@ git add \
   deb/libevl_${LIBEVL_VERSION}_amd64.deb
 
 git add \
-  deb/linux-headers-${KERNEL_VERSION}-cip24-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
-  deb/linux-image-${KERNEL_VERSION}-cip24-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
+  deb/linux-headers-${KERNEL_VERSION}-cip24${KERNEL_LOCAL_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
+  deb/linux-image-${KERNEL_VERSION}-cip24${KERNEL_LOCAL_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
 
 git clean -f deb/
