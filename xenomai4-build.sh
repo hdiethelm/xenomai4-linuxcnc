@@ -41,7 +41,7 @@ git add \
   deb/libevl_${LIBEVL_VERSION}_amd64.deb
 
 git add \
-  deb/linux-headers-${KERNEL_VERSION}-cip22-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
-  deb/linux-image-${KERNEL_VERSION}-cip22-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
+  deb/linux-headers-${KERNEL_VERSION}-cip24-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
+  deb/linux-image-${KERNEL_VERSION}-cip24-xenomai4-${KERNEL_GIT_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
 
 git clean -f deb/
