@@ -97,3 +97,5 @@ sudo rm -r /opt/evl/
 ### Developer Information
 
 linux-evl branch: v6.12.y-cip-evl-rebase
+
+evl ABI/API: libevl/include/evl/version.h / linux-evl/include/uapi/evl/control-abi.h
