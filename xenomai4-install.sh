@@ -6,8 +6,8 @@ set -e
 
 #Xenomai4 Kernel-----------------------------------------
 sudo dpkg -i \
-  deb/linux-headers-${KERNEL_VERSION}-cip24${KERNEL_LOCAL_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb \
-  deb/linux-image-${KERNEL_VERSION}-cip24${KERNEL_LOCAL_VERSION}_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
+  deb/linux-headers-${KERNEL_PACKAGE_VERSION}_amd64.deb \
+  deb/linux-image-${KERNEL_PACKAGE_VERSION}_amd64.deb
 
 #Reboot, check for xenomai:
 # sudo dmesg | grep -i xenomai
