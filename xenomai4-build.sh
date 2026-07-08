@@ -28,7 +28,7 @@ make oldconfig
 echo evl check result--------
 evl check -f .config || true
 echo ------------------------
-make -j16 deb-pkg LOCALVERSION=$KERNEL_LOCAL_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
+make -j$(nproc) deb-pkg LOCALVERSION=$KERNEL_LOCAL_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
 
 cd ..
   
