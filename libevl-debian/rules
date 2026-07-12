@@ -1,25 +1,21 @@
 #!/usr/bin/make -f
 
-# See debhelper(7) (uncomment to enable).
-# Output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
+#Default: linux-evl is in same folder
+# Use UAPI=FULL_PATH dpkg-buildpackage ... to specify custom location
+#Not recommended to use /usr/include with debian packages due to:
+# - libevl installs most headers there except asm/evl
+# - linux-libc-dev installs all headers but conflicts with libevl
+#   due to some headers are installed at the same location
+UAPI ?= $(CURDIR)/../linux-evl
 
-# See FEATURE AREAS in dpkg-buildflags(1).
-#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-
-# See ENVIRONMENT in dpkg-buildflags(1).
-# Package maintainers to append CFLAGS.
-#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
-# Package maintainers to append LDFLAGS.
-#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
-
+ifeq ("$(wildcard $(UAPI))","")
+  $(error UAPI not found in $(UAPI))
+endif
 
 %:
-	dh $@
+	dh $@ --buildsystem=meson
 
-
-# dh_make generated override targets.
-# This is an example for Cmake (see <https://bugs.debian.org/641051>).
 override_dh_auto_configure:
-	dh_auto_configure --buildsystem=meson -- -Duapi=$(CURDIR)/../linux-evl
+	dh_auto_configure --buildsystem=meson -- -Duapi=$(UAPI)

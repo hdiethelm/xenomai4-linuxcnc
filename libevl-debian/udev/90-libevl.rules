@@ -1,0 +1,11 @@
+# Xenomai4 EVL devices
+SUBSYSTEM=="evl", MODE="0660", GROUP="evl"
+KERNEL=="realtime", SUBSYSTEM=="clock", MODE="0660", GROUP="evl"
+KERNEL=="monotonic", SUBSYSTEM=="clock", MODE="0660", GROUP="evl"
+KERNEL=="monotonic_raw", SUBSYSTEM=="clock", MODE="0660", GROUP="evl"
+KERNEL=="clone", SUBSYSTEM=="monitor", MODE="0660", GROUP="evl"
+KERNEL=="clone", SUBSYSTEM=="observable", MODE="0660", GROUP="evl"
+KERNEL=="clone", SUBSYSTEM=="proxy", MODE="0660", GROUP="evl"
+KERNEL=="clone", SUBSYSTEM=="thread", MODE="0660", GROUP="evl"
+KERNEL=="clone", SUBSYSTEM=="xbuf", MODE="0660", GROUP="evl"
+KERNEL=="latmus", SUBSYSTEM=="latmus", MODE="0660", GROUP="evl"

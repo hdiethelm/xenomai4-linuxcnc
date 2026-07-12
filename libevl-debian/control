@@ -1,19 +1,31 @@
 Source: libevl
-Section: unknown
-Priority: optional
+Section: devel
+Priority: extra
 Maintainer: Hannes Diethelm <hannes.diethelm@gmail.com>
 Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 13),
+ meson,
+ pkgconf,
+ libbpf-dev,
+ cpio,
 Standards-Version: 4.7.2
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Browser: https://salsa.debian.org/debian/libevl
-#Vcs-Git: https://salsa.debian.org/debian/libevl.git
+Homepage: https://v4.xenomai.org/
 
 Package: libevl
 Architecture: any
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
-Description: <insert up to 60 chars description>
- <Insert long description, indented with spaces.>
+Description: libevl libraries and tools
+  Xenomai4 EVL userspace libraries and tools
+
+Package: libevl-test
+Architecture: any
+Depends:
+ libevl,
+ gdb,
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: libevl test suite
+  Xenomai4 EVL test suite

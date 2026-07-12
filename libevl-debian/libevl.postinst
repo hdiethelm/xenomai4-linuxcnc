@@ -20,6 +20,9 @@ set -e
 
 case "$1" in
     configure)
+        if ! getent group evl >/dev/null; then
+            addgroup --quiet --system evl
+        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
