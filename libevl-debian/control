@@ -17,6 +17,8 @@ Architecture: any
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
+Recommends:
+ udev,
 Description: libevl libraries and tools
   Xenomai4 EVL userspace libraries and tools
 

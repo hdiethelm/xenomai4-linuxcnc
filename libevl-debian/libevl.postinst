@@ -17,12 +17,20 @@ set -e
 # for details, see https://www.debian.org/doc/debian-policy/ or
 # the debian-policy package.
 
+trigger_udev() {
+    if ! which udevadm >/dev/null 2>&1 ; then
+        return 0;
+    fi
+    udevadm control --reload-rules || true
+    udevadm trigger || true
+}
 
 case "$1" in
     configure)
         if ! getent group evl >/dev/null; then
             addgroup --quiet --system evl
         fi
+        trigger_udev
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
