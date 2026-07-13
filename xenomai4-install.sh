@@ -13,4 +13,6 @@ sudo dpkg -i \
 # sudo dmesg | grep -i xenomai
 
 #Xenomai4 userspace tools-------------------------------------
-sudo dpkg -i deb/libevl_${LIBEVL_VERSION}_amd64.deb
+sudo dpkg -i \
+  deb/libevl_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
+  deb/libevl-test_${LIBEVL_PACKAGE_VERSION}_amd64.deb
