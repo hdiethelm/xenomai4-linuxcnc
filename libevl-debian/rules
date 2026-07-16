@@ -11,7 +11,7 @@
 UAPI ?= $(CURDIR)/../linux-evl
 
 ifeq ("$(wildcard $(UAPI))","")
-  $(error UAPI not found in $(UAPI))
+$(error UAPI not found in $(UAPI))
 endif
 
 %:
@@ -19,3 +19,4 @@ endif
 
 override_dh_auto_configure:
 	dh_auto_configure --buildsystem=meson -- -Duapi=$(UAPI)
+
