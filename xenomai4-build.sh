@@ -28,7 +28,7 @@ make oldconfig
 echo evl check result--------
 evl check -f .config || true
 echo ------------------------
-make -j$(nproc) deb-pkg LOCALVERSION=$KERNEL_LOCAL_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
+make -j$(nproc) bindeb-pkg LOCALVERSION=$KERNEL_LOCAL_VERSION KDEB_PKGVERSION=$(make kernelversion)-${KERNEL_VERSION_STUFFIX}
 
 cd ..
   
@@ -44,7 +44,7 @@ cd ..
 #Cleanup-----------------------------------------------------
 mkdir -p deb
 mv *.deb deb
-rm *.changes *.buildinfo *.orig.tar.gz *.debian.tar.gz *.dsc
+rm *.changes *.buildinfo
 
 git -C linux-evl clean -fxd
 git -C libevl clean -fxd
