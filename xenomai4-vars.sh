@@ -1,16 +1,22 @@
 #! /bin/sh
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 [lib|kernel|kernel_rt]"
+    exit 1
+fi
+
 LIBEVL_VERSION=59
 LIBEVL_VERSION_STUFFIX=2
 LIBEVL_PACKAGE_VERSION=${LIBEVL_VERSION}-${LIBEVL_VERSION_STUFFIX}
 
-KERNEL_RT=true
-if $KERNEL_RT ; then
+if [ "$1" = "kernel_rt" ]; then
 	KERNEL_CONFIG=kconfig-base-config-6.12.94+deb13-rt-amd64.txt
 	KERNEL_LOCAL_VERSION=-xenomai4-r${LIBEVL_VERSION}-rt
 else
 	KERNEL_CONFIG=kconfig-base-config-6.12.94+deb13-amd64.txt
 	KERNEL_LOCAL_VERSION=-xenomai4-r${LIBEVL_VERSION}
 fi
+
 KERNEL_VERSION=6.12.90
 KERNEL_VERSION_CIP=-cip24
 KERNEL_VERSION_STUFFIX=3
