@@ -1,0 +1,3 @@
+usr/include/*
+usr/lib/*/pkgconfig/evl.pc
+usr/lib/*/libevl.a

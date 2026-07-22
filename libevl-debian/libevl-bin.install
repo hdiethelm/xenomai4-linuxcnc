@@ -1,0 +1,6 @@
+usr/bin/evl
+usr/bin/oob-*
+usr/bin/latmus
+usr/libexec/evl/evl-[!t]*
+usr/libexec/evl/*trace*
+usr/libexec/evl/kconf-checklist.evl

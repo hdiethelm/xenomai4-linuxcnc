@@ -19,8 +19,36 @@ Depends:
  ${misc:Depends},
 Recommends:
  udev,
-Description: libevl libraries and tools
-  Xenomai4 EVL userspace libraries and tools
+Description: libevl library (shared library)
+ Xenomai4 EVL userspace library
+ .
+ This package contains the shared library.
+
+Package: libevl-bin
+Architecture: any
+Depends:
+ libevl,
+ ${shlibs:Depends},
+ ${misc:Depends},
+Recommends:
+ udev,
+Description: libevl tools
+ Xenomai4 EVL userspace tools
+ .
+ This package contains the evl tools.
+
+Package: libevl-dev
+Architecture: any
+Depends:
+ libevl,
+ ${shlibs:Depends},
+ ${misc:Depends},
+Recommends:
+ udev,
+Description: libevl library (development files)
+ Xenomai4 EVL userspace library
+ .
+ This package is needed to compile programs against libevl.
 
 Package: libevl-test
 Architecture: any
