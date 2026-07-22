@@ -1,0 +1,53 @@
+diff --git a/scripts/package/builddeb b/scripts/package/builddeb
+index fb686fd3266f..5e95dad9de57 100755
+--- a/scripts/package/builddeb
++++ b/scripts/package/builddeb
+@@ -149,7 +149,7 @@ case "${package}" in
+ 	install_linux_image_dbg "${package}";;
+ linux-image-*|user-mode-linux-*)
+ 	install_linux_image "${package}";;
+-linux-libc-dev)
++linux-libc-evl-dev)
+ 	install_libc_headers "${package}";;
+ linux-headers-*)
+ 	install_kernel_headers "${package}";;
+diff --git a/scripts/package/debian/rules b/scripts/package/debian/rules
+index 2b3f9a0bd6c4..a7c50812c2a0 100755
+--- a/scripts/package/debian/rules
++++ b/scripts/package/debian/rules
+@@ -27,12 +27,12 @@ make-opts = ARCH=$(ARCH) KERNELRELEASE=$(KERNELRELEASE) \
+     $(addprefix KBUILD_BUILD_VERSION=,$(revision)) \
+     $(addprefix CROSS_COMPILE=,$(CROSS_COMPILE))
+ 
+-binary-targets := $(addprefix binary-, image image-dbg headers libc-dev)
++binary-targets := $(addprefix binary-, image image-dbg headers libc-evl-dev)
+ 
+ all-packages = $(shell dh_listpackages)
+ image-package = $(filter linux-image-% user-%, $(filter-out %-dbg, $(all-packages)))
+ image-dbg-package = $(filter %-dbg, $(all-packages))
+-libc-dev-package = $(filter linux-libc-dev, $(all-packages))
++libc-evl-dev-package = $(filter linux-libc-evl-dev, $(all-packages))
+ headers-package = $(filter linux-headers-%, $(all-packages))
+ 
+ mk-files = $(patsubst binary-%,debian/%.files,$1)
+diff --git a/scripts/package/mkdebian b/scripts/package/mkdebian
+index fc3b7fa709fc..1f42dadfdfc6 100755
+--- a/scripts/package/mkdebian
++++ b/scripts/package/mkdebian
+@@ -215,11 +215,13 @@ EOF
+ if [ "${SRCARCH}" != um ]; then
+ cat <<EOF >> debian/control
+ 
+-Package: linux-libc-dev
++Package: linux-libc-evl-dev
+ Section: devel
+-Provides: linux-kernel-headers
++Provides: linux-kernel-headers, linux-libc-dev
++Conflicts: linux-libc-dev
++Replaces: linux-libc-dev
+ Architecture: $debarch
+-Description: Linux support headers for userspace development
++Description: Linux / evl support headers for userspace development
+  This package provides userspaces headers from the Linux kernel.  These headers
+  are used by the installed headers for GNU glibc and other system libraries.
+ Multi-Arch: same

@@ -19,6 +19,8 @@ if [ "$1" = "kernel" -o "$1" = "kernel_rt" ]; then
 
     cd linux-evl
 
+    patch -p1 < ../linux-evl-deb.patch
+
     if [ $KERNEL_VERSION != $(make kernelversion) ]; then
         echo Error: kernel version missmatch, $KERNEL_VERSION != $(make kernelversion)
         exit 1
@@ -43,10 +45,12 @@ if [ "$1" = "kernel" -o "$1" = "kernel_rt" ]; then
     mv *.deb *.changes *.buildinfo deb
 
     git -C linux-evl clean -fxd
+    git -C linux-evl checkout -- .
 
     git add \
       deb/linux-headers-${KERNEL_PACKAGE_VERSION}_amd64.deb \
-      deb/linux-image-${KERNEL_PACKAGE_VERSION}_amd64.deb
+      deb/linux-image-${KERNEL_PACKAGE_VERSION}_amd64.deb \
+      deb/linux-libc-evl-dev_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
 
     git clean -f deb/
 fi
@@ -69,6 +73,8 @@ if [ "$1" = "lib" ]; then
 
     git add \
       deb/libevl_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
+      deb/libevl-bin_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
+      deb/libevl-dev_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
       deb/libevl-test_${LIBEVL_PACKAGE_VERSION}_amd64.deb
 
     git clean -f deb/
