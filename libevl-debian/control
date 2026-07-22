@@ -27,7 +27,7 @@ Description: libevl library (shared library)
 Package: libevl-bin
 Architecture: any
 Depends:
- libevl,
+ libevl (= ${binary:Version}),
  ${shlibs:Depends},
  ${misc:Depends},
 Recommends:
@@ -40,7 +40,8 @@ Description: libevl tools
 Package: libevl-dev
 Architecture: any
 Depends:
- libevl,
+ libevl (= ${binary:Version}),
+ linux-libc-evl-dev,
  ${shlibs:Depends},
  ${misc:Depends},
 Recommends:
@@ -53,7 +54,8 @@ Description: libevl library (development files)
 Package: libevl-test
 Architecture: any
 Depends:
- libevl,
+ libevl (= ${binary:Version}),
+ libevl-bin (= ${binary:Version}),
  gdb,
  ${shlibs:Depends},
  ${misc:Depends},
