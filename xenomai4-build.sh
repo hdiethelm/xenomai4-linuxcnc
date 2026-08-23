@@ -36,8 +36,9 @@ if [ "$BUILD_TYPE" = "kernel" -o "$BUILD_TYPE" = "kernel_rt" ]; then
     cd ..
 
     #Cleanup-----------------------------------------------------
-    mkdir -p package
-    mv *.deb *.changes *.buildinfo package
+    rm -rf ${PACKAGE_DIR}
+    mkdir -p ${PACKAGE_DIR}
+    mv *.deb *.changes *.buildinfo ${PACKAGE_DIR}
 
     git -C linux-evl clean -fxd
     git -C linux-evl checkout -- .
@@ -54,8 +55,26 @@ if [ "$BUILD_TYPE" = "lib" ]; then
     cd ..
 
     #Cleanup-----------------------------------------------------
-    mkdir -p package
-    mv *.deb *.changes *.buildinfo package
+    rm -rf ${PACKAGE_DIR}
+    mkdir -p ${PACKAGE_DIR}
+    mv *.deb *.changes *.buildinfo ${PACKAGE_DIR}
 
     git -C libevl clean -fxd
+fi
+
+if [ "$BUILD_TYPE" = "linuxcnc" ]; then
+    #LinuxCNC-------------------------------------
+    cd linuxcnc-src
+    DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dch -v ${LINUXCNC_VERSION} "Custom LinuxCNC with Xenomai4 support and other backports"
+    ./debian/configure
+    dpkg-buildpackage -b -uc
+    cd ..
+
+    #Cleanup-----------------------------------------------------
+    rm -rf ${PACKAGE_DIR}
+    mkdir -p ${PACKAGE_DIR}
+    mv *.deb *.changes *.buildinfo ${PACKAGE_DIR}
+
+    git -C linuxcnc-src clean -fxd
+    git -C linuxcnc-src checkout -- .
 fi

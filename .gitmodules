@@ -4,3 +4,6 @@
 [submodule "libevl"]
 	path = libevl
 	url = https://gitlab.com/xenomai/xenomai4/libevl.git
+[submodule "linuxcnc-src"]
+	path = linuxcnc-src
+	url = git@github.com:hdiethelm/linuxcnc-fork.git
