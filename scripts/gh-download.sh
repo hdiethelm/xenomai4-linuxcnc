@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e
 
-. ./xenomai4-vars.sh
+. scripts/config.sh
 
 REPO="hdiethelm/xenomai4-linuxcnc"
 TAG=${GH_RELEASE_TAG}

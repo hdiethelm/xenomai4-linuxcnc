@@ -2,7 +2,7 @@
 
 set -e
 
-. ./xenomai4-vars.sh
+. scripts/config.sh
 
 if [ "$BUILD_TYPE" = "kernel" -o "$BUILD_TYPE" = "kernel_rt" ]; then
     #Xenomai4 Kernel-----------------------------------------
