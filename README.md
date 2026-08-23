@@ -8,31 +8,49 @@
 
 ## How To
 
-- Clone repo
-- If you trust my binary packages
-  - `./xenomai4-install.sh`
-- Build it from source
-  - `git submodule init`
-  - `git submodule update`
-  - `xenomai4-prepare.sh`
-  - `xenomai4-build.sh`
-  - `xenomai4-install.sh`
+- Download the latest github release: https://github.com/hdiethelm/xenomai4-linuxcnc/releases
+- Install the following packages
+  - linux-headers-VERSION_amd64.deb
+  - linux-image-VERSION_amd64.deb
+  - linux-libc-evl-dev_VERSION_amd64.deb
+  - libevl_VERSION_amd64.deb
+  - libevl-bin_VERSION_amd64.deb
+  - libevl-dev_VERSION_amd64.deb
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
   - `sudo dmesg | grep -i evl`
+- Continue with [Build LinuxCNC from source](#build-linuxcnc-from-source)
+
+## Build libevl and kernel from source
+
+- Clone repo
+- Build it from source
+  - `git submodule init`
+  - `git submodule update`
+  - `xenomai4-deps.sh`
+  - `xenomai4-build.sh kernel` or `xenomai4-build.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
+  - `xenomai4-build.sh lib`
+- Install
+  - `xenomai4-install.sh kernel` or `xenomai4-install.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
+  - `xenomai4-install.sh lib`
+- Reboot to xenomai kernel (You probably have to select it in grub)
+- Check for xenomai
+  - `sudo dmesg | grep -i evl`
+
+## Build LinuxCNC from source
 - Build LinuxCNC
   - `git clone https://github.com/LinuxCNC/linuxcnc.git linuxcnc-src`
-  - `cd inuxcnc-src/src`
+  - `cd inuxcnc-src`
   - `./debian/configure`
   - `sudo apt-get build-dep .`
+  - `cd src`
   - `./autogen.sh`
   - `./configure --with-realtime=uspace`
     - configure should show:<br>
-    `checking for rtai-config... none`<br>
-    `checking for xeno-config... /usr/xenomai/bin/xeno-config`<br>
-    `checking for realtime API(s) to use... uspace+xenomai`
-  - `make -j`
-  - `sudo make setuid`
+    `checking for evl/evl.h... yes`<br>
+    `checking for realtime API(s) to use... uspace+xenomai4`
+  - `make -j $(nproc)`
+  - `sudo make setuid` or `sudo make setcap` (linuxcnc master supports rootless operation)
 - Run LinuxCNC
   - ../scripts/linuxcnc
   - LinuxCNC should show: `Note: Using XENOMAI4 EVL realtime`
