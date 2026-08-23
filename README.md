@@ -12,13 +12,13 @@
 
 - Clone repo
 - Download the github release
-  - `./xenomai4-gh-download.sh kernel`
-  - `./xenomai4-gh-download.sh lib`
-  - `./xenomai4-gh-download.sh linuxcnc`
+  - `scripts/gh-download.sh kernel`
+  - `scripts/gh-download.sh lib`
+  - `scripts/gh-download.sh linuxcnc`
 - Install the packages
-  - `./xenomai4-install.sh kernel`
-  - `./xenomai4-install.sh lib`
-  - `./xenomai4-install.sh linuxcnc`
+  - `scripts/install.sh kernel`
+  - `scripts/install.sh lib`
+  - `scripts/install.sh linuxcnc`
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
   - `sudo dmesg | grep -i evl`
@@ -31,12 +31,12 @@
 - Build it from source
   - `git submodule init`
   - `git submodule update`
-  - `xenomai4-deps.sh`
-  - `xenomai4-build.sh kernel` or `xenomai4-build.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
-  - `xenomai4-build.sh lib`
+  - `scripts/install-deps.sh`
+  - `scripts/build.sh kernel` or `scripts/build.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
+  - `scripts/build.sh lib`
 - Install
-  - `xenomai4-install.sh kernel` or `xenomai4-install.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
-  - `xenomai4-install.sh lib`
+  - `scripts/install.sh kernel` or `scripts/install.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
+  - `scripts/install.sh lib`
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
   - `sudo dmesg | grep -i evl`
@@ -48,10 +48,10 @@
 - Build it from source
   - `git submodule init`
   - `git submodule update`
-  - `xenomai4-deps.sh`
-  - `xenomai4-build.sh linuxcnc`
+  - `scripts/install-deps.sh`
+  - `scripts/build.sh linuxcnc`
 - Install
-  - `xenomai4-install.sh linuxcnc`
+  - `scripts/install.sh linuxcnc`
 
 ### Upstream master
 - Build LinuxCNC
