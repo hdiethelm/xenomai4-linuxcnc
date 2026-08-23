@@ -8,3 +8,9 @@ sudo apt install build-essential libncurses-dev bison flex libssl-dev libelf-dev
 #Xenomai4 libevl-------------------------------------
 sudo apt install libltdl-dev gdb devscripts meson ninja-build libbpf-dev cpio
 
+#LinuxCNC-------------------------------------
+cd linuxcnc-src
+debian/configure
+sudo apt-get build-dep .
+git clean -fxd .
+cd ..
