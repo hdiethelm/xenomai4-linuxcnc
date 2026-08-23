@@ -2,7 +2,7 @@
 
 if [ -z "$BUILD_TYPE" ]; then
     if [ "$#" -ne 1 ]; then
-        echo "Usage: $0 [lib|kernel|kernel_rt]"
+        echo "Usage: $0 [kernel|kernel_rt|libevl|linuxcnc]"
         exit 1
     fi
     BUILD_TYPE=$1
@@ -38,7 +38,7 @@ if [ "$BUILD_TYPE" = "kernel_rt" ]; then
     PACKAGE_DIR=pkg-kernel-rt
 fi
 
-if [ "$BUILD_TYPE" = "lib" ]; then
+if [ "$BUILD_TYPE" = "libevl" ]; then
     GH_RELEASE_TAG=libevl-${LIBEVL_PACKAGE_VERSION}
     PACKAGE_DIR=pkg-libevl
 fi

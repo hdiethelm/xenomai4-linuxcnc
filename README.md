@@ -8,16 +8,16 @@
 
 <strong>Expected Distribution: Debian Trixie</strong>
 
-## How To
+## Install prebuilt kernel / libevl / linuxcnc 2.9.10
 
 - Clone repo
 - Download the github release
   - `scripts/gh-download.sh kernel`
-  - `scripts/gh-download.sh lib`
+  - `scripts/gh-download.sh libevl`
   - `scripts/gh-download.sh linuxcnc`
 - Install the packages
   - `scripts/install.sh kernel`
-  - `scripts/install.sh lib`
+  - `scripts/install.sh libevl`
   - `scripts/install.sh linuxcnc`
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
@@ -33,10 +33,10 @@
   - `git submodule update`
   - `scripts/install-deps.sh`
   - `scripts/build.sh kernel` or `scripts/build.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
-  - `scripts/build.sh lib`
+  - `scripts/build.sh libevl`
 - Install
   - `scripts/install.sh kernel` or `scripts/install.sh kernel_rt` (Depending if you prefer a kernel without or with PREEMPT_RT)
-  - `scripts/install.sh lib`
+  - `scripts/install.sh libevl`
 - Reboot to xenomai kernel (You probably have to select it in grub)
 - Check for xenomai
   - `sudo dmesg | grep -i evl`

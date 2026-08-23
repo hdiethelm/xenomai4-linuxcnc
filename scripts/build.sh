@@ -44,7 +44,7 @@ if [ "$BUILD_TYPE" = "kernel" -o "$BUILD_TYPE" = "kernel_rt" ]; then
     git -C linux-evl checkout -- .
 fi
 
-if [ "$BUILD_TYPE" = "lib" ]; then
+if [ "$BUILD_TYPE" = "libevl" ]; then
     #Xenomai4 userspace tools-------------------------------------
     cd libevl
     #DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dh_make --createorig -p libevl_56

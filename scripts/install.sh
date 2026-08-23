@@ -15,7 +15,7 @@ if [ "$BUILD_TYPE" = "kernel" -o "$BUILD_TYPE" = "kernel_rt" ]; then
     # sudo dmesg | grep -i xenomai
 fi
 
-if [ "$BUILD_TYPE" = "lib" ]; then
+if [ "$BUILD_TYPE" = "libevl" ]; then
     #Xenomai4 userspace tools-------------------------------------
     sudo apt install --reinstall \
       ./pkg-libevl/libevl_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
