@@ -2,14 +2,9 @@
 
 set -e
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 [lib|kernel|kernel_rt]"
-    exit 1
-fi
+. ./xenomai4-vars.sh
 
-. ./xenomai4-vars.sh $@
-
-if [ "$1" = "kernel" -o "$1" = "kernel_rt" ]; then
+if [ "$BUILD_TYPE" = "kernel" -o "$BUILD_TYPE" = "kernel_rt" ]; then
     #Xenomai4 Kernel-----------------------------------------
     #git clone https://gitlab.com/xenomai/xenomai4/linux-evl.git
     #git -C linux-evl v6.12.y-cip-evl-rebase
@@ -41,41 +36,26 @@ if [ "$1" = "kernel" -o "$1" = "kernel_rt" ]; then
     cd ..
 
     #Cleanup-----------------------------------------------------
-    mkdir -p deb
-    mv *.deb *.changes *.buildinfo deb
+    mkdir -p package
+    mv *.deb *.changes *.buildinfo package
 
     git -C linux-evl clean -fxd
     git -C linux-evl checkout -- .
-
-    git add \
-      deb/linux-headers-${KERNEL_PACKAGE_VERSION}_amd64.deb \
-      deb/linux-image-${KERNEL_PACKAGE_VERSION}_amd64.deb \
-      deb/linux-libc-evl-dev_${KERNEL_VERSION}-${KERNEL_VERSION_STUFFIX}_amd64.deb
-
-    git clean -f deb/
 fi
 
-if [ "$1" = "lib" ]; then
+if [ "$BUILD_TYPE" = "lib" ]; then
     #Xenomai4 userspace tools-------------------------------------
     cd libevl
     #DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dh_make --createorig -p libevl_56
     #dh_auto_configure --buildsystem=meson -- -Duapi=$(pwd)/../linux-evl/usr/include
     cp -r ../libevl-debian/ debian
-    DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dch -v ${LIBEVL_PACKAGE_VERSION} "Update r${LIBEVL_VERSION}"
+    DEBEMAIL="hannes.diethelm@gmail.com" DEBFULLNAME="Hannes Diethelm" dch -v ${LIBEVL_PACKAGE_VERSION} "Update ${LIBEVL_VERSION}"
     dpkg-buildpackage -b -uc
     cd ..
 
     #Cleanup-----------------------------------------------------
-    mkdir -p deb
-    mv *.deb *.changes *.buildinfo deb
+    mkdir -p package
+    mv *.deb *.changes *.buildinfo package
 
     git -C libevl clean -fxd
-
-    git add \
-      deb/libevl_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
-      deb/libevl-bin_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
-      deb/libevl-dev_${LIBEVL_PACKAGE_VERSION}_amd64.deb \
-      deb/libevl-test_${LIBEVL_PACKAGE_VERSION}_amd64.deb
-
-    git clean -f deb/
 fi

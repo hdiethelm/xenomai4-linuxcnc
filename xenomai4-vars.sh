@@ -1,15 +1,18 @@
 #! /bin/sh
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 [lib|kernel|kernel_rt]"
-    exit 1
+if [ -z "$BUILD_TYPE" ]; then
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: $0 [lib|kernel|kernel_rt]"
+        exit 1
+    fi
+    BUILD_TYPE=$1
 fi
 
 LIBEVL_VERSION=0.59
 LIBEVL_VERSION_STUFFIX=3
 LIBEVL_PACKAGE_VERSION=${LIBEVL_VERSION}-${LIBEVL_VERSION_STUFFIX}
 
-if [ "$1" = "kernel_rt" ]; then
+if [ $BUILD_TYPE = "kernel_rt" ]; then
 	KERNEL_CONFIG=kconfig-base-config-6.12.94+deb13-rt-amd64.txt
 	KERNEL_LOCAL_VERSION=-xenomai4-${LIBEVL_VERSION}-rt
 else
