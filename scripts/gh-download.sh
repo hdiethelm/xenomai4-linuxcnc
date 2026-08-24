@@ -8,12 +8,12 @@ TAG=${GH_RELEASE_TAG}
 DEST=${PACKAGE_DIR}
 
 command -v curl >/dev/null 2>&1 || {
-    echo "Error: curl is required" >&2
+    echo "Error: curl is required. To install, run: sudo apt install curl" >&2
     exit 1
 }
 
 command -v jq >/dev/null 2>&1 || {
-    echo "Error: jq is required" >&2
+    echo "Error: jq is required. To install, run: sudo apt install jq" >&2
     exit 1
 }
 
