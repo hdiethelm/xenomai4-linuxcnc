@@ -28,22 +28,25 @@ KERNEL_PACKAGE_VERSION=${KERNEL_VERSION}${KERNEL_VERSION_CIP}${KERNEL_LOCAL_VERS
 LINUXCNC_PKG_VERSION=2.9.10-3
 LINUXCNC_VERSION=2:${LINUXCNC_PKG_VERSION}
 
-if [ "$BUILD_TYPE" = "kernel" ]; then
-    GH_RELEASE_TAG=kernel-${KERNEL_PACKAGE_VERSION}
-    PACKAGE_DIR=pkg-kernel
-fi
-
-if [ "$BUILD_TYPE" = "kernel_rt" ]; then
-    GH_RELEASE_TAG=kernel-${KERNEL_PACKAGE_VERSION}
-    PACKAGE_DIR=pkg-kernel-rt
-fi
-
-if [ "$BUILD_TYPE" = "libevl" ]; then
-    GH_RELEASE_TAG=libevl-${LIBEVL_PACKAGE_VERSION}
-    PACKAGE_DIR=pkg-libevl
-fi
-
-if [ "$BUILD_TYPE" = "linuxcnc" ]; then
-    GH_RELEASE_TAG=linuxcnc-${LINUXCNC_PKG_VERSION}
-    PACKAGE_DIR=pkg-linuxcnc
-fi
+case "$BUILD_TYPE" in
+    "kernel")
+        GH_RELEASE_TAG=kernel-${KERNEL_PACKAGE_VERSION}
+        PACKAGE_DIR=pkg-kernel
+        ;;
+    "kernel_rt")
+        GH_RELEASE_TAG=kernel-${KERNEL_PACKAGE_VERSION}
+        PACKAGE_DIR=pkg-kernel-rt
+        ;;
+    "libevl")
+        GH_RELEASE_TAG=libevl-${LIBEVL_PACKAGE_VERSION}
+        PACKAGE_DIR=pkg-libevl
+        ;;
+    "linuxcnc")
+        GH_RELEASE_TAG=linuxcnc-${LINUXCNC_PKG_VERSION}
+        PACKAGE_DIR=pkg-linuxcnc
+        ;;
+    *)
+        echo "Usage: $0 [kernel|kernel_rt|libevl|linuxcnc]"
+        exit 1
+        ;;
+esac

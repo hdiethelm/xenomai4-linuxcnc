@@ -19,7 +19,6 @@ command -v jq >/dev/null 2>&1 || {
 
 API_URL="https://api.github.com/repos/${REPO}/releases/tags/${TAG}"
 
-rm -rf "$DEST"
 mkdir -p "$DEST"
 cd "$DEST"
 
@@ -28,7 +27,7 @@ ASSETS=$(curl -fsSL \
     -H "Accept: application/vnd.github+json" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
     "$API_URL" |
-    jq -r '.assets[] | [.name, .browser_download_url] | @tsv')
+    jq -r '.assets[] | [.name, .browser_download_url, .digest] | @tsv')
 
 if [[ -z "$ASSETS" ]]; then
     echo "Error: no release assets found." >&2
@@ -37,16 +36,29 @@ fi
 
 COUNT=0
 
-while IFS=$'\t' read -r NAME URL; do
+while IFS=$'\t' read -r NAME URL DIGEST; do
     [[ -z "$NAME" ]] && continue
 
-    echo "Downloading: $NAME"
-    curl -fL \
-        --retry 3 \
-        --retry-delay 2 \
-        -C - \
-        -o "$NAME" \
-        "$URL"
+    DIGEST_CMD="${DIGEST//sha256:/} $NAME"
+
+    if echo "$DIGEST_CMD" | sha256sum -c &> /dev/null ; then
+        echo "Already downloaded: $NAME"
+    else
+        echo "Downloading: $NAME"
+        curl -fL \
+            --retry 3 \
+            --retry-delay 2 \
+            -C - \
+            -o "$NAME" \
+            "$URL"
+
+        if echo "$DIGEST_CMD" | sha256sum -c &> /dev/null ; then
+            echo "Checksum ok: $NAME"
+        else
+            echo "Checksum fail: $NAME"
+            rm "$NAME"
+        fi
+    fi
 
     ((COUNT += 1))
 done <<< "$ASSETS"
