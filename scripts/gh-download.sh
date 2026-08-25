@@ -4,8 +4,8 @@ set -e
 . scripts/config.sh
 
 REPO="hdiethelm/xenomai4-linuxcnc"
-TAG=${GH_RELEASE_TAG}
-DEST=${PACKAGE_DIR}
+TAG="$GH_RELEASE_TAG"
+DEST="$PACKAGE_DIR"
 
 command -v curl >/dev/null 2>&1 || {
     echo "Error: curl is required. To install, run: sudo apt install curl" >&2
@@ -44,6 +44,7 @@ while IFS=$'\t' read -r NAME URL DIGEST; do
     if echo "$DIGEST_CMD" | sha256sum -c &> /dev/null ; then
         echo "Already downloaded: $NAME"
     else
+        rm -f "$NAME"
         echo "Downloading: $NAME"
         curl -fL \
             --retry 3 \
